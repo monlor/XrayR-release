@@ -12,6 +12,11 @@ services:
       # for cert
       - DOMAIN=hk01.example.com
       - EMAIL=admin@example.com
+      # default http
+      # file: /etc/XrayR/cert/node.cert /etc/XrayR/cert/node.key
+      - CERT_MODE=http
+      # CERT_MODE=dns required
+      - CLOUDFLARE_API_KEY=xxx
     volumes:
       - certs:/etc/XrayR/cert
     restart: unless-stopped

@@ -35,9 +35,15 @@ Nodes:
       UpdatePeriodic: 10 # Time to update the nodeinfo, how many sec.
       EnableDNS: false # Use custom DNS config, Please ensure that you set the dns.json well
       CertConfig:
-        CertMode: http # Option about how to get certificate: none, file, http, dns
+        CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN}" # Domain to cert
         Email: ${EMAIL:-admin@examle.com}
+        CertFile: /etc/XrayR/cert/node.cert # Provided if the CertMode is file
+        KeyFile: /etc/XrayR/cert/node.key
+        Provider: cloudflare # DNS cert provider, Get the full support list here: https://go-acme.github.io/lego/dns/
+        DNSEnv: # DNS ENV option used by DNS provider
+          CLOUDFLARE_EMAIL: ${DOMAIN}
+          CLOUDFLARE_API_KEY: ${CLOUDFLARE_API_KEY}
 EOF
 
 XrayR --config /etc/XrayR/config.yml
