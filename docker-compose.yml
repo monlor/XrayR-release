@@ -13,7 +13,7 @@ services:
       - DOMAIN=hk01.example.com
       - EMAIL=admin@example.com
       # default http
-      # file: /etc/XrayR/cert/node.cert /etc/XrayR/cert/node.key
+      # file: /etc/XrayR/cert/node.crt /etc/XrayR/cert/node.key
       - CERT_MODE=http
       # CERT_MODE=dns required
       - CLOUDFLARE_API_KEY=xxx

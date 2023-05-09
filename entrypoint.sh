@@ -38,7 +38,7 @@ Nodes:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN}" # Domain to cert
         Email: ${EMAIL:-admin@examle.com}
-        CertFile: /etc/XrayR/cert/node.cert # Provided if the CertMode is file
+        CertFile: /etc/XrayR/cert/node.crt # Provided if the CertMode is file
         KeyFile: /etc/XrayR/cert/node.key
         Provider: cloudflare # DNS cert provider, Get the full support list here: https://go-acme.github.io/lego/dns/
         DNSEnv: # DNS ENV option used by DNS provider
