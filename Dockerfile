@@ -1,6 +1,6 @@
 FROM ghcr.io/xrayr-project/xrayr:latest
 
-COPY config /etc/XrayR/config
+COPY config /etc/XrayR/
 
 COPY entrypoint.sh /
 

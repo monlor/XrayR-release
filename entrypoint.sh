@@ -1,8 +1,8 @@
 #!/bin/sh
 
-set -u
+set -ue
 
-cat > /etc/Xrayr/config.yml <<-EOF
+cat > /etc/XrayR/config.yml <<-EOF
 Log:
   Level: warning # Log level: none, error, warning, info, debug 
   AccessPath: # /etc/XrayR/access.Log
