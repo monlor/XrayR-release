@@ -12,7 +12,11 @@
             "type": "field",
             "outboundTag": "block",
             "protocol": [
-                "bittorrent"
+                "bittorrent",
+                "BitTorrent protocol",
+                "torrent",
+                "SMTP",
+                "Thunder"
             ]
         },
         {

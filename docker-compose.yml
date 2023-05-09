@@ -2,7 +2,14 @@ version: '3'
 services: 
   xrayr: 
     image: ghcr.io/xrayr-project/xrayr:latest
-    volumes:
-      - ./config:/etc/XrayR/ # 映射配置文件夹
-    restart: always
+    container_name: xrayr
+    environment:
+      - API_HOST=
+      - API_KEY=
+      - NODE_ID=
+      #  V2ray, Shadowsocks, Trojan
+      - NODE_TYPE=
+      - DOMAIN=hk01.example.com
+      - EMAIL=admin@example.com
+    restart: unless-stopped
     network_mode: host

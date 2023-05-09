@@ -1,3 +1,9 @@
+# Fork修改自用
+
+1. 域名默认走http获取，不通过dns
+2. 仅支持NewV2Board，为了简化部署配置
+3. 添加常用审计规则
+
 # XRayR
 A Xray backend framework that can easily support many panels.
 
