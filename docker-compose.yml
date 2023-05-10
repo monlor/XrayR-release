@@ -17,6 +17,10 @@ services:
       - CERT_MODE=http
       # CERT_MODE=dns required
       - CLOUDFLARE_API_KEY=xxx
+      # device limit
+      # - DEVICE_LIMIT=true
+      # - REDIS_ADDR=127.0.0.1:6379
+      # - REDIS_PASSWORD=123456
     volumes:
       - certs:/etc/XrayR/cert
     restart: unless-stopped

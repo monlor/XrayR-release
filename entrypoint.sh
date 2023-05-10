@@ -30,10 +30,31 @@ Nodes:
       EnableXTLS: ${ENABLE_XTLS:-false} # Enable XTLS for V2ray and Trojan
       SpeedLimit: 0 # Mbps, Local settings will replace remote settings
       DeviceLimit: 0 # Local settings will replace remote settings
+      RuleListPath: /etc/XrayR/rulelist Path to local rulelist file
     ControllerConfig:
       ListenIP: 0.0.0.0 # IP address you want to listen
-      UpdatePeriodic: 10 # Time to update the nodeinfo, how many sec.
+      SendIP: 0.0.0.0 # IP address you want to send pacakage
+      UpdatePeriodic: 60 # Time to update the nodeinfo, how many sec.
       EnableDNS: false # Use custom DNS config, Please ensure that you set the dns.json well
+      DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
+      DisableUploadTraffic: false # Disable Upload Traffic to the panel
+      DisableGetRule: false # Disable Get Rule from the panel
+      DisableIVCheck: false # Disable the anti-reply protection for Shadowsocks
+      DisableSniffing: false # Disable domain sniffing 
+      EnableProxyProtocol: false
+      # 限速500mbps，5次告警阈值之后限速到100mbps，持续60分钟
+      AutoSpeedLimitConfig:
+        Limit: 500 # Warned speed. Set to 0 to disable AutoSpeedLimit ()
+        WarnTimes: 5 # After (WarnTimes) consecutive warnings, the user will be limited. Set to 0 to punish overspeed user immediately.
+        LimitSpeed: 100 # The speedlimit of a limited user (unit: mbps)
+        LimitDuration: 60 # How many minutes will the limiting last (unit: minute)
+      GlobalDeviceLimitConfig:
+        Enable: ${DEVICE_LIMIT:-false} # Enable the global device limit of a user
+        RedisAddr: ${REDIS_ADDR:-127.0.0.1} # The redis server address
+        RedisPassword: ${REDIS_PASSWORD:-} # Redis password
+        RedisDB: 0 # Redis DB
+        Timeout: 8 # Timeout for redis request
+        Expiry: 60 # Expiry time (second)
       CertConfig:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN:-}" # Domain to cert
