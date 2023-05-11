@@ -1,6 +1,14 @@
 {
-    "domainStrategy": "IPOnDemand",
+    "domainStrategy": "AsIs",
     "rules": [
+        {
+            "type": "field",
+            "domain": [
+                "domain:openai.com",
+                "domain:ai.com"
+            ],
+            "outboundTag": "WARP"
+        },
         {
             "type": "field",
             "outboundTag": "block",

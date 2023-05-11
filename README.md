@@ -3,6 +3,7 @@
 1. 域名默认走http获取，可配置dns，仅支持cf
 2. 仅支持NewV2Board，为了简化部署配置
 3. 添加常用审计规则
+4. chatgpt解锁，不支持大陆、香港和美国 LA的vps，[来源](https://github.com/fscarmen/warp/blob/main/README.md#通过-warp-解锁-chatgpt-的方法)
 
 # XRayR
 A Xray backend framework that can easily support many panels.
