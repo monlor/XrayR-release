@@ -11,6 +11,15 @@
         },
         {
             "type": "field",
+            "domain": [
+                "geosite:netflix",
+                "geosite:disney",
+                "domain:ip.gs"
+            ],
+            "outboundTag": "media-unlock"
+        },
+        {
+            "type": "field",
             "outboundTag": "block",
             "ip": [
                 "geoip:private"
@@ -25,13 +34,6 @@
                 "torrent",
                 "SMTP",
                 "Thunder"
-            ]
-        },
-        {
-            "type": "field",
-            "outboundTag": "IPv6_out",
-            "domain": [
-                "geosite:netflix"
             ]
         }
     ]

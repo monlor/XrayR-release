@@ -20,6 +20,19 @@
         }
     },
     {
+        "tag": "media-unlock",
+        "protocol": "socks",
+        "settings": {
+            "servers": [
+                {
+                    "address": "wgcf",
+                    "port": 40000,
+                    "users": []
+                }
+            ]
+        }
+    },
+    {
         "tag": "IPv4_out",
         "protocol": "freedom",
         "settings": {}
