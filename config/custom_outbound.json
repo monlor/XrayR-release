@@ -25,7 +25,7 @@
         "settings": {
             "servers": [
                 {
-                    "address": "wgcf",
+                    "address": "127.0.0.1",
                     "port": 40000,
                     "users": []
                 }
