@@ -71,7 +71,7 @@ EOF
 # media-unlock IPv4_out IPv6_out
 MEDIA_OUT=${MEDIA_OUT:-media-unlock}
 
-cat > /etc/XrayR/custom_outbound.json <<-EOF
+cat > /etc/XrayR/route.json <<-EOF
 {
     "domainStrategy": "AsIs",
     "rules": [
