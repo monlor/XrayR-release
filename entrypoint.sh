@@ -2,6 +2,7 @@
 
 set -ue
 
+echo "生成XrayR配置..."
 cat > /etc/XrayR/config.yml <<-EOF
 Log:
   Level: warning # Log level: none, error, warning, info, debug 
@@ -65,6 +66,52 @@ Nodes:
         DNSEnv: # DNS ENV option used by DNS provider
           CLOUDFLARE_EMAIL: ${EMAIL:-admin@examle.com}
           CLOUDFLARE_API_KEY: ${CLOUDFLARE_API_KEY:-}
+EOF
+
+# media-unlock IPv4_out IPv6_out
+MEDIA_OUT=${MEDIA_OUT:-media-unlock}
+
+cat > /etc/XrayR/custom_outbound.json <<-EOF
+{
+    "domainStrategy": "AsIs",
+    "rules": [
+        {
+            "type": "field",
+            "domain": [
+                "domain:openai.com",
+                "domain:ai.com"
+            ],
+            "outboundTag": "WARP"
+        },
+        {
+            "type": "field",
+            "domain": [
+                "geosite:netflix",
+                "geosite:disney",
+                "domain:ip.gs"
+            ],
+            "outboundTag": "${MEDIA_OUT}"
+        },
+        {
+            "type": "field",
+            "outboundTag": "block",
+            "ip": [
+                "geoip:private"
+            ]
+        },
+        {
+            "type": "field",
+            "outboundTag": "block",
+            "protocol": [
+                "bittorrent",
+                "BitTorrent protocol",
+                "torrent",
+                "SMTP",
+                "Thunder"
+            ]
+        }
+    ]
+}
 EOF
 
 XrayR --config /etc/XrayR/config.yml
