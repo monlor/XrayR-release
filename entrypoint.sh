@@ -69,7 +69,8 @@ Nodes:
 EOF
 
 # media-unlock IPv4_out IPv6_out
-MEDIA_OUT=${MEDIA_OUT:-media-unlock}
+MEDIA_OUT=${MEDIA_OUT:-Warp}
+CHATGPT_OUT=${CHATGPT_OUT:-ChatGPT}
 
 cat > /etc/XrayR/route.json <<-EOF
 {
@@ -81,7 +82,7 @@ cat > /etc/XrayR/route.json <<-EOF
                 "domain:openai.com",
                 "domain:ai.com"
             ],
-            "outboundTag": "WARP"
+            "outboundTag": "${CHATGPT_OUT}"
         },
         {
             "type": "field",

@@ -3,7 +3,7 @@
         "protocol": "freedom"
     },
     {
-        "tag": "WARP",
+        "tag": "ChatGPT",
         "protocol": "wireguard",
         "settings": {
             "secretKey": "cKE7LmCF61IhqqABGhvJ44jWXp8fKymcMAEVAzbDF2k=",
@@ -20,7 +20,7 @@
         }
     },
     {
-        "tag": "media-unlock",
+        "tag": "Warp",
         "protocol": "socks",
         "settings": {
             "servers": [
@@ -42,16 +42,6 @@
         "protocol": "freedom",
         "settings": {
             "domainStrategy": "UseIPv6"
-        }
-    },
-    {
-        "tag": "socks5-warp",
-        "protocol": "socks",
-        "settings": {
-            "servers": [{
-                "address": "127.0.0.1",
-                "port": 1080
-            }]
         }
     },
     {
