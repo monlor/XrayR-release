@@ -7,7 +7,9 @@ name: docker-image
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - release
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   schedule:
@@ -29,6 +31,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/main') || (github.ref == 'refs/heads/release' && github.event_name == 'push')
     permissions:
       contents: read
       packages: write
