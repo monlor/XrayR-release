@@ -38,11 +38,7 @@ Nodes:
       UpdatePeriodic: 60 # Time to update the nodeinfo, how many sec.
       EnableDNS: false # Use custom DNS config, Please ensure that you set the dns.json well
       DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
-      DisableUploadTraffic: false # Disable Upload Traffic to the panel
-      DisableGetRule: false # Disable Get Rule from the panel
-      DisableIVCheck: false # Disable the anti-reply protection for Shadowsocks
-      DisableSniffing: false # Disable domain sniffing 
-      EnableProxyProtocol: false
+      EnableProxyProtocol: false # Only works for WebSocket and TCP
       # 限速500mbps，5次告警阈值之后限速到100mbps，持续60分钟
       AutoSpeedLimitConfig:
         Limit: 500 # Warned speed. Set to 0 to disable AutoSpeedLimit ()
@@ -56,6 +52,14 @@ Nodes:
         RedisDB: 0 # Redis DB
         Timeout: 8 # Timeout for redis request
         Expiry: 60 # Expiry time (second)
+      EnableFallback: ${ENABLE_FALLBACK:-false} # Only support for Trojan and Vless
+      FallBackConfigs:  # Support multiple fallbacks
+        -
+          SNI: # TLS SNI(Server Name Indication), Empty for any
+          Alpn: # Alpn, Empty for any
+          Path: # HTTP PATH, Empty for any
+          Dest: 80 # Required, Destination of fallback, check https://xtls.github.io/config/features/fallback.html for details.
+          ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for dsable
       CertConfig:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN:-}" # Domain to cert
