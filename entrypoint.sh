@@ -8,7 +8,7 @@ Log:
   Level: warning # Log level: none, error, warning, info, debug 
   AccessPath: # /etc/XrayR/access.Log
   ErrorPath: # /etc/XrayR/error.log
-DnsConfigPath: # /etc/XrayR/dns.json # Path to dns config, check https://xtls.github.io/config/dns.html for help
+DnsConfigPath: /etc/XrayR/dns.json # Path to dns config, check https://xtls.github.io/config/dns.html for help
 RouteConfigPath: /etc/XrayR/route.json # Path to route config, check https://xtls.github.io/config/routing.html for help
 InboundConfigPath: # /etc/XrayR/custom_inbound.json # Path to custom inbound config, check https://xtls.github.io/config/inbound.html for help
 OutboundConfigPath: /etc/XrayR/custom_outbound.json # Path to custom outbound config, check https://xtls.github.io/config/outbound.html for help
@@ -36,8 +36,8 @@ Nodes:
       ListenIP: 0.0.0.0 # IP address you want to listen
       SendIP: 0.0.0.0 # IP address you want to send pacakage
       UpdatePeriodic: 60 # Time to update the nodeinfo, how many sec.
-      EnableDNS: false # Use custom DNS config, Please ensure that you set the dns.json well
-      DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
+      EnableDNS: ${ENABLE_DNS:-true} # Use custom DNS config, Please ensure that you set the dns.json well
+      DNSType: UseIP # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
       EnableProxyProtocol: false # Only works for WebSocket and TCP
       # 限速500mbps，5次告警阈值之后限速到100mbps，持续60分钟
       AutoSpeedLimitConfig:
@@ -71,6 +71,39 @@ Nodes:
           CLOUDFLARE_EMAIL: ${EMAIL:-admin@examle.com}
           CLOUDFLARE_API_KEY: ${CLOUDFLARE_API_KEY:-}
 EOF
+
+echo "生成dns配置..."
+if [ -n "${MEDIA_DNS_SERVER}" ]; then
+  cat > /etc/XrayR/dns.json <<-EOF
+{
+    "servers": [
+      "8.8.8.8",
+      "8.8.4.4",
+      {
+        "address": "${MEDIA_DNS_SERVER}",
+        "port": 53,
+        "domains": [
+          "geosite:netflix",
+          "geosite:disney"
+        ]
+      },
+      "localhost"
+    ],
+    "tag": "dns_inbound"
+}
+EOF
+else
+  cat > /etc/XrayR/dns.json <<-EOF
+{
+    "servers": [
+        "1.1.1.1",
+        "8.8.8.8",
+        "localhost"
+    ],
+    "tag": "dns_inbound"
+}
+EOF
+fi
 
 # media-unlock IPv4_out IPv6_out
 MEDIA_OUT=${MEDIA_OUT:-Warp}

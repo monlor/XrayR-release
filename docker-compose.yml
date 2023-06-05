@@ -18,6 +18,9 @@ services:
       # CERT_MODE=dns required
       - CLOUDFLARE_API_KEY=xxx
       - ENABLE_FALLBACK=true
+      - ENABLE_DNS=true
+      # 流媒体解锁dns
+      - MEDIA_DNS_SERVER=1.2.3.4
       # device limit
       # - DEVICE_LIMIT=true
       # - REDIS_ADDR=127.0.0.1:6379
