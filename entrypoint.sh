@@ -74,14 +74,17 @@ EOF
 
 echo "生成dns配置..."
 if [ -n "${MEDIA_DNS_SERVER}" ]; then
+  dns_ip=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $1}')
+  dns_port=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $2}')
   cat > /etc/XrayR/dns.json <<-EOF
 {
     "servers": [
       "8.8.8.8",
       "8.8.4.4",
       {
-        "address": "${MEDIA_DNS_SERVER}",
-        "port": 53,
+        
+        "address": "${dns_ip}",
+        "port": ${dns_port:-53},
         "domains": [
           "geosite:netflix",
           "geosite:disney"
