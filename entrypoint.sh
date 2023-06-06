@@ -105,8 +105,7 @@ else
 EOF
 fi
 
-# media-unlock IPv4_out IPv6_out
-MEDIA_OUT=${MEDIA_OUT:-Warp}
+# chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
 CHATGPT_OUT=${CHATGPT_OUT:-ChatGPT}
 
 cat > /etc/XrayR/route.json <<-EOF
@@ -120,15 +119,6 @@ cat > /etc/XrayR/route.json <<-EOF
                 "domain:ai.com"
             ],
             "outboundTag": "${CHATGPT_OUT}"
-        },
-        {
-            "type": "field",
-            "domain": [
-                "geosite:netflix",
-                "geosite:disney",
-                "domain:ip.gs"
-            ],
-            "outboundTag": "${MEDIA_OUT}"
         },
         {
             "type": "field",
