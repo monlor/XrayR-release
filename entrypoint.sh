@@ -75,6 +75,11 @@ EOF
 echo "生成dns配置..."
 if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
   dns_ip=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $1}')
+  # 判断dns_ip是不是ip格式，如果不是则认为是域名，自动解析出ip
+  if ! echo ${dns_ip} | grep -qE '^([0-9]{1,3}\.){3}[0-9]{1,3}$'; then
+    dns_ip=$(nslookup ${dns_ip} | grep -A 1 'Name:' | tail -n 1 | awk '{print $NF}')
+  fi
+  
   dns_port=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $2}')
   cat > /etc/XrayR/dns.json <<-EOF
 {
