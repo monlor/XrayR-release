@@ -19,6 +19,8 @@ services:
       - CLOUDFLARE_API_KEY=xxx
       - ENABLE_FALLBACK=true
       - ENABLE_DNS=true
+      # 本地节点限速，优先级高于面板，单位Mbps
+      # SPEED_LIMIT=10
       # 流媒体解锁dns
       - MEDIA_DNS_SERVER=1.2.3.4
       # device limit
