@@ -87,7 +87,6 @@ if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
       "8.8.8.8",
       "8.8.4.4",
       {
-        
         "address": "${dns_ip}",
         "port": ${dns_port:-53},
         "domains": [
