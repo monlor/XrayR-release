@@ -161,7 +161,8 @@ if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
   }]'
   proxy_route_config='[{
     "type": "field",
-    "outboundTag": "residential_proxy",
+    "network": "tcp,udp",
+    "outboundTag": "residential_proxy"
   }]'
   inject_json_obj /etc/XrayR/custom_outbound.json '.' "$proxy_outbound_config"
   inject_json_obj /etc/XrayR/route.json '.rules' "$proxy_route_config"

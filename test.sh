@@ -1,0 +1,9 @@
+export API_HOST=xx
+export API_KEY=xx
+export NODE_TYPE=V2ray
+export NODE_ID=1
+export RESIDENTIAL_PROXY=true
+export RESIDENTIAL_PROXY_USER=xxx
+export RESIDENTIAL_PROXY_PASS=xxx
+export RESIDENTIAL_PROXY_PORT=22225
+export RESIDENTIAL_PROXY_SERVER=x.x.x.x
