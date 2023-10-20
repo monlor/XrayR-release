@@ -4,18 +4,10 @@
         {
             "type": "field",
             "domain": [
-                "geosite:openai"
+                "domain:openai.com",
+                "domain:ai.com"
             ],
-            "outboundTag": "WARP"
-        },
-        {
-            "type": "field",
-            "domain": [
-                "geosite:netflix",
-                "geosite:disney",
-                "domain:ip.gs"
-            ],
-            "outboundTag": "media-unlock"
+            "outboundTag": "${CHATGPT_OUT}"
         },
         {
             "type": "field",

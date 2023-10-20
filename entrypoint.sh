@@ -113,40 +113,59 @@ EOF
 fi
 
 # chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
-CHATGPT_OUT=${CHATGPT_OUT:-ChatGPT}
+export CHATGPT_OUT="${CHATGPT_OUT:-ChatGPT}"
 
-cat > /etc/XrayR/route.json <<-EOF
-{
-    "domainStrategy": "AsIs",
-    "rules": [
-        {
-            "type": "field",
-            "domain": [
-                "domain:openai.com",
-                "domain:ai.com"
-            ],
-            "outboundTag": "${CHATGPT_OUT}"
-        },
-        {
-            "type": "field",
-            "outboundTag": "block",
-            "ip": [
-                "geoip:private"
-            ]
-        },
-        {
-            "type": "field",
-            "outboundTag": "block",
-            "protocol": [
-                "bittorrent",
-                "BitTorrent protocol",
-                "torrent",
-                "SMTP",
-                "Thunder"
-            ]
-        }
-    ]
+# inject variables
+inject_var() {
+  envsubst < "$1" > "$1".tmp
+  mv "$1".tmp "$1"
 }
-EOF
+
+# inject json object to json file
+inject_json_obj() {
+  file="$1"
+  # json path, eg: .rules .
+  path="$2"
+  # json array, eg: [{"a": 1}]
+  arr="$3"
+  jq "$path += $arr" < "$file" > "$file".tmp
+  mv "$file".tmp "$file"
+}
+
+cp -f /etc/XrayR/route.json.example /etc/XrayR/route.json
+cp -f /etc/XrayR/custom_outbound.json.example /etc/XrayR/custom_outbound.json
+
+inject_var /etc/XrayR/route.json
+
+# 住宅ip代理
+if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
+  echo "生成住宅ip代理配置..."
+  proxy_outbound_config='[{
+    "tag": "residential_proxy",
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "'${RESIDENTIAL_PROXY_SERVER}'",
+          "port": '${RESIDENTIAL_PROXY_PORT}',
+          "users": [
+            {
+              "user": "'${RESIDENTIAL_PROXY_USER}'",
+              "pass": "'${RESIDENTIAL_PROXY_PASS}'",
+              "level": 1
+            }
+          ]
+        }
+      ]
+    }
+  }]'
+  proxy_route_config='[{
+    "type": "field",
+    "outboundTag": "residential_proxy",
+  }]'
+  inject_json_obj /etc/XrayR/custom_outbound.json '.' "$proxy_outbound_config"
+  inject_json_obj /etc/XrayR/route.json '.rules' "$proxy_route_config"
+fi
+
 
 XrayR --config /etc/XrayR/config.yml

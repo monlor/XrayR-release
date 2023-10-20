@@ -29,6 +29,12 @@ services:
       # - REDIS_PASSWORD=123456
       # chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
       # - CHATGPT_OUT=Warp
+      # 住宅ip出口代理
+      # - RESIDENTIAL_PROXY=true
+      # - RESIDENTIAL_PROXY_USER=xxx
+      # - RESIDENTIAL_PROXY_PASS=xxx
+      # - RESIDENTIAL_PROXY_PORT=22225
+      # - RESIDENTIAL_PROXY_SERVER=x.x.x.x
     volumes:
       - certs:/etc/XrayR/cert
     restart: unless-stopped

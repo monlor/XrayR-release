@@ -4,8 +4,8 @@ COPY config /etc/XrayR/
 
 COPY entrypoint.sh /
 
-RUN chmod +x /entrypoint.sh
+RUN apk add --no-cache jq gettext
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT [ "sh" "/entrypoint.sh" ]
 
 CMD []
