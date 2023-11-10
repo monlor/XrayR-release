@@ -91,7 +91,18 @@ if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
         "port": ${dns_port:-53},
         "domains": [
           "geosite:netflix",
-          "geosite:disney"
+          "geosite:disney",
+          "geosite:hulu",
+          "geosite:primevideo",
+          "geosite:cbs",
+          "geosite:abc",
+          "geosite:dmm",
+          "geosite:fox",
+          "geosite:bbc",
+          "geosite:hbo",
+          "geosite:bahamut",
+          "geosite:abema",
+          "geosite:openai"
         ]
       },
       "localhost"
