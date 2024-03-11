@@ -29,7 +29,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/main') || (github.ref == 'refs/heads/release' && github.event_name == 'push')
     permissions:
       contents: read
       packages: write
