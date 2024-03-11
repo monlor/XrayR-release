@@ -129,6 +129,8 @@ export CHATGPT_OUT="${CHATGPT_OUT:-ChatGPT}"
 export DEFAULT_OUT="${DEFAULT_OUT:-IPv4_out}"
 
 # 住宅ip代理
+# 端口需要有默认值
+export RESIDENTIAL_PROXY_PORT=${RESIDENTIAL_PROXY_PORT:-6001}
 if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
   echo "生成住宅代理已启用..."
   DEFAULT_OUT="residential_proxy"
