@@ -1,5 +1,5 @@
 {
-    "domainStrategy": "AsIs",
+    "domainStrategy": "IPOnDemand",
     "rules": [
         {
             "type": "field",
@@ -26,6 +26,11 @@
                 "SMTP",
                 "Thunder"
             ]
+        },
+        {
+            "type": "field",
+            "outboundTag": "IPv4_out",
+            "network": "udp,tcp"
         }
     ]
 }

@@ -1,8 +1,5 @@
 [
     {
-        "protocol": "freedom"
-    },
-    {
         "tag": "ChatGPT",
         "protocol": "wireguard",
         "settings": {

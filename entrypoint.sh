@@ -37,7 +37,7 @@ Nodes:
       SendIP: 0.0.0.0 # IP address you want to send pacakage
       UpdatePeriodic: 60 # Time to update the nodeinfo, how many sec.
       EnableDNS: ${ENABLE_DNS:-true} # Use custom DNS config, Please ensure that you set the dns.json well
-      DNSType: UseIP # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
+      DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
       EnableProxyProtocol: false # Only works for WebSocket and TCP
       # 限速500mbps，5次告警阈值之后限速到100mbps，持续60分钟
       AutoSpeedLimitConfig:
@@ -64,8 +64,8 @@ Nodes:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN:-}" # Domain to cert
         Email: ${EMAIL:-admin@examle.com}
-        CertFile: /etc/XrayR/cert/node.crt # Provided if the CertMode is file
-        KeyFile: /etc/XrayR/cert/node.key
+        CertFile: /etc/XrayR/cert/node-${NODE_ID}.crt # Provided if the CertMode is file
+        KeyFile: /etc/XrayR/cert/node-${NODE_ID}.key
         Provider: cloudflare # DNS cert provider, Get the full support list here: https://go-acme.github.io/lego/dns/
         DNSEnv: # DNS ENV option used by DNS provider
           CLOUDFLARE_EMAIL: ${EMAIL:-admin@examle.com}
