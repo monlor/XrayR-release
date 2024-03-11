@@ -125,6 +125,14 @@ fi
 
 # chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
 export CHATGPT_OUT="${CHATGPT_OUT:-ChatGPT}"
+# 默认路由出口
+export DEFAULT_OUT="${DEFAULT_OUT:-IPv4_out}"
+
+# 住宅ip代理
+if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
+  echo "生成住宅代理已启用..."
+  DEFAULT_OUT="residential_proxy"
+fi
 
 # inject variables
 inject_var() {
@@ -147,37 +155,6 @@ cp -f /etc/XrayR/route.json.example /etc/XrayR/route.json
 cp -f /etc/XrayR/custom_outbound.json.example /etc/XrayR/custom_outbound.json
 
 inject_var /etc/XrayR/route.json
-
-# 住宅ip代理
-if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
-  echo "生成住宅ip代理配置..."
-  proxy_outbound_config='[{
-    "tag": "residential_proxy",
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "'${RESIDENTIAL_PROXY_SERVER}'",
-          "port": '${RESIDENTIAL_PROXY_PORT}',
-          "users": [
-            {
-              "user": "'${RESIDENTIAL_PROXY_USER}'",
-              "pass": "'${RESIDENTIAL_PROXY_PASS}'",
-              "level": 1
-            }
-          ]
-        }
-      ]
-    }
-  }]'
-  proxy_route_config='[{
-    "type": "field",
-    "network": "tcp,udp",
-    "outboundTag": "residential_proxy"
-  }]'
-  inject_json_obj /etc/XrayR/custom_outbound.json '.' "$proxy_outbound_config"
-  inject_json_obj /etc/XrayR/route.json '.rules' "$proxy_route_config"
-fi
-
+inject_var /etc/XrayR/custom_outbound.json
 
 XrayR --config /etc/XrayR/config.yml

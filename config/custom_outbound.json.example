@@ -53,6 +53,25 @@
         }
     },
     {
+        "tag": "residential_proxy",
+        "protocol": "socks",
+        "settings": {
+            "servers": [
+                {
+                    "address": "${RESIDENTIAL_PROXY_SERVER}",
+                    "port": ${RESIDENTIAL_PROXY_PORT:-1},
+                    "users": [
+                        {
+                            "user": "${RESIDENTIAL_PROXY_USER}",
+                            "pass": "${RESIDENTIAL_PROXY_PASS}",
+                            "level": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
         "protocol": "blackhole",
         "tag": "block"
     }

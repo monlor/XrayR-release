@@ -29,7 +29,7 @@
         },
         {
             "type": "field",
-            "outboundTag": "IPv4_out",
+            "outboundTag": "${DEFAULT_OUT}",
             "network": "udp,tcp"
         }
     ]
