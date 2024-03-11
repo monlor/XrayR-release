@@ -59,7 +59,7 @@
             "servers": [
                 {
                     "address": "${RESIDENTIAL_PROXY_SERVER}",
-                    "port": ${RESIDENTIAL_PROXY_PORT:-1},
+                    "port": ${RESIDENTIAL_PROXY_PORT},
                     "users": [
                         {
                             "user": "${RESIDENTIAL_PROXY_USER}",
