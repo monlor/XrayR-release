@@ -2,27 +2,23 @@
     {
         "tag": "ChatGPT",
         "protocol": "wireguard",
-        "settings": {
-            "secretKey": "YFYOAdbw1bKTHlNNi+aEjBM3BO7unuFC5rOkMRAz9XY=",
-            "address": [
+        "settings":{
+            "secretKey":"YFYOAdbw1bKTHlNNi+aEjBM3BO7unuFC5rOkMRAz9XY=", // 粘贴你的 "private_key" 值
+            "address":[
                 "172.16.0.2/32",
                 "2606:4700:110:8a36:df92:102a:9602:fa18/128"
             ],
-            "peers": [
+            "peers":[
                 {
-                    "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                    "allowedIPs": [
+                    "publicKey":"bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+                    "allowedIPs":[
                         "0.0.0.0/0",
                         "::/0"
                     ],
-                    "endpoint": "engage.cloudflareclient.com:2408"
+                    "endpoint":"engage.cloudflareclient.com:2408" // 或填写 162.159.193.10:2408 或 [2606:4700:d0::a29f:c001]:2408
                 }
             ],
-            "reserved": [
-                78,
-                135,
-                76
-            ],
+            "reserved":[78, 135, 76], // 粘贴你的 "reserved" 值
             "mtu": 1280
         }
     },

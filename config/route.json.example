@@ -1,11 +1,11 @@
 {
-    "domainStrategy": "IPOnDemand",
+    "domainStrategy": "AsIs",
     "rules": [
         {
             "type": "field",
             "domain": [
-                "domain:openai.com",
-                "domain:ai.com"
+                "geosite:openai",
+                "ip.gs"
             ],
             "outboundTag": "${CHATGPT_OUT}"
         },
