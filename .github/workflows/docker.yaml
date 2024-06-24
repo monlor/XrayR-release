@@ -12,8 +12,9 @@ on:
       - release
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
-  schedule:
-    - cron: '0 16 * * *' 
+  # schedule:
+  #   - cron: '0 16 * * *' 
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}
