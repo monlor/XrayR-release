@@ -1,6 +1,10 @@
 [
     {
-        "tag": "ChatGPT",
+        "protocol":"freedom",
+        "tag": "direct"
+    },
+    {
+        "tag": "wireguard",
         "protocol": "wireguard",
         "settings":{
             "secretKey":"YFYOAdbw1bKTHlNNi+aEjBM3BO7unuFC5rOkMRAz9XY=",
@@ -23,23 +27,31 @@
         }
     },
     {
-        
-        "tag": "Warp",
-        "protocol": "socks",
-        "settings": {
-            "servers": [
-                {
-                    "address": "127.0.0.1",
-                    "port": 40000,
-                    "users": []
-                }
-            ]
-        }
+        "protocol":"freedom",
+        "settings":{
+            "domainStrategy":"UseIPv4"
+        },
+        "proxySettings":{
+            "tag":"wireguard"
+        },
+        "tag":"IPv4_Warp"
     },
+    {
+        "protocol":"freedom",
+        "settings":{
+            "domainStrategy":"UseIPv6"
+        },
+        "proxySettings":{
+            "tag":"wireguard"
+        },
+        "tag":"IPv6_Warp"
+    }
     {
         "tag": "IPv4_out",
         "protocol": "freedom",
-        "settings": {}
+        "settings":{
+            "domainStrategy":"UseIPv4"
+        }
     },
     {
         "tag": "IPv6_out",

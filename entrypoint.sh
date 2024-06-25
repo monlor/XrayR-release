@@ -74,13 +74,13 @@ EOF
 
 echo "生成dns配置..."
 if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
-  dns_ip=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $1}')
+  dns_ip=$(echo "${MEDIA_DNS_SERVER}" | awk -F ':' '{print $1}')
   # 判断dns_ip是不是ip格式，如果不是则认为是域名，自动解析出ip
-  if ! echo ${dns_ip} | grep -qE '^([0-9]{1,3}\.){3}[0-9]{1,3}$'; then
-    dns_ip=$(nslookup ${dns_ip} | grep -A 1 'Name:' | tail -n 1 | awk '{print $NF}')
+  if ! echo "${dns_ip}" | grep -qE '^([0-9]{1,3}\.){3}[0-9]{1,3}$'; then
+    dns_ip=$(nslookup "${dns_ip}" | grep -A 1 'Name:' | tail -n 1 | awk '{print $NF}')
   fi
   
-  dns_port=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $2}')
+  dns_port=$(echo "${MEDIA_DNS_SERVER}" | awk -F ':' '{print $2}')
   cat > /etc/XrayR/dns.json <<-EOF
 {
     "servers": [
@@ -101,8 +101,12 @@ if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
           "geosite:bbc",
           "geosite:hbo",
           "geosite:bahamut",
+          "geosite:4chan",
+          "geosite:niconico",
+          "geosite:pixiv",
           "geosite:abema",
-          "geosite:openai"
+          "geosite:viu",
+          "geosite:bilibili"
         ]
       },
       "localhost"
@@ -124,13 +128,15 @@ EOF
 fi
 
 # chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
-export CHATGPT_OUT="${CHATGPT_OUT:-ChatGPT}"
+export CHATGPT_OUT="${CHATGPT_OUT:-IPv4_Warp}"
 # 默认路由出口
 export DEFAULT_OUT="${DEFAULT_OUT:-IPv4_out}"
+# 流媒体
+export MEDIA_OUT="${MEDIA_OUT:-IPv4_out}"
 
 # 住宅ip代理
 # 端口需要有默认值
-export RESIDENTIAL_PROXY_PORT=${RESIDENTIAL_PROXY_PORT:-6001}
+export RESIDENTIAL_PROXY_PORT="${RESIDENTIAL_PROXY_PORT:-6001}"
 if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
   echo "生成住宅代理已启用..."
   DEFAULT_OUT="residential_proxy"

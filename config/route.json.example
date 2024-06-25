@@ -5,9 +5,31 @@
             "type": "field",
             "domain": [
                 "geosite:openai",
-                "ip.gs"
             ],
             "outboundTag": "${CHATGPT_OUT}"
+        },
+        {
+            "type": "field",
+            "domain": [
+                "geosite:netflix",
+                "geosite:disney",
+                "geosite:hulu",
+                "geosite:primevideo",
+                "geosite:cbs",
+                "geosite:abc",
+                "geosite:dmm",
+                "geosite:fox",
+                "geosite:bbc",
+                "geosite:hbo",
+                "geosite:bahamut",
+                "geosite:4chan",
+                "geosite:niconico",
+                "geosite:pixiv",
+                "geosite:abema",
+                "geosite:viu",
+                "geosite:bilibili"
+            ],
+            "outboundTag": "${MEDIA_OUT}"
         },
         {
             "type": "field",

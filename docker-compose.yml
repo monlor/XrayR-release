@@ -27,8 +27,10 @@ services:
       # - DEVICE_LIMIT=true
       # - REDIS_ADDR=127.0.0.1:6379
       # - REDIS_PASSWORD=123456
-      # chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
-      # - CHATGPT_OUT=Warp
+      # chatgpt outbound, IPv4_Warp(default) IPv6_Warp IPv4_out IPv6_out
+      # - CHATGPT_OUT=IPv4_Warp
+      # media out, IPv4_out(default) IPv4_Warp IPv6_Warp IPv6_out
+      # - MEDIA_OUT=IPv4_Warp
       # 住宅ip出口代理
       # - RESIDENTIAL_PROXY=true
       # - RESIDENTIAL_PROXY_USER=xxx
