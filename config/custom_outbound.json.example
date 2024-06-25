@@ -80,7 +80,7 @@
         }
     },
     {
-        "tag": "Block"
+        "tag": "Block",
         "protocol": "blackhole"
     }
 ]
