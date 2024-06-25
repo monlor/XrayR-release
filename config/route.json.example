@@ -4,7 +4,7 @@
         {
             "type": "field",
             "domain": [
-                "geosite:openai",
+                "geosite:openai"
             ],
             "outboundTag": "${CHATGPT_OUT}"
         },
@@ -33,14 +33,14 @@
         },
         {
             "type": "field",
-            "outboundTag": "block",
+            "outboundTag": "Block",
             "ip": [
                 "geoip:private"
             ]
         },
         {
             "type": "field",
-            "outboundTag": "block",
+            "outboundTag": "Block",
             "protocol": [
                 "bittorrent",
                 "BitTorrent protocol",

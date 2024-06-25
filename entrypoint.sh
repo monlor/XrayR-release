@@ -127,19 +127,19 @@ else
 EOF
 fi
 
-# chatgpt outbound, ChatGPT(default) Warp IPv4_out IPv6_out
-export CHATGPT_OUT="${CHATGPT_OUT:-IPv4_Warp}"
 # 默认路由出口
-export DEFAULT_OUT="${DEFAULT_OUT:-IPv4_out}"
+export DEFAULT_OUT="${DEFAULT_OUT:-IPv4_Out}"
+# chatgpt outbound
+export CHATGPT_OUT="${CHATGPT_OUT:-IPv4_Warp}"
 # 流媒体
-export MEDIA_OUT="${MEDIA_OUT:-IPv4_out}"
+export MEDIA_OUT="${MEDIA_OUT:-IPv4_Out}"
 
 # 住宅ip代理
 # 端口需要有默认值
 export RESIDENTIAL_PROXY_PORT="${RESIDENTIAL_PROXY_PORT:-6001}"
 if [ "${RESIDENTIAL_PROXY:-false}" = "true" ]; then
   echo "生成住宅代理已启用..."
-  DEFAULT_OUT="residential_proxy"
+  DEFAULT_OUT="Residential_Proxy"
 fi
 
 # inject variables

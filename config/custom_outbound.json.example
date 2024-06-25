@@ -1,10 +1,10 @@
 [
     {
         "protocol":"freedom",
-        "tag": "direct"
+        "tag": "Direct"
     },
     {
-        "tag": "wireguard",
+        "tag": "Wireguard",
         "protocol": "wireguard",
         "settings":{
             "secretKey":"YFYOAdbw1bKTHlNNi+aEjBM3BO7unuFC5rOkMRAz9XY=",
@@ -27,41 +27,41 @@
         }
     },
     {
+        "tag":"IPv4_Warp",
         "protocol":"freedom",
         "settings":{
             "domainStrategy":"UseIPv4"
         },
         "proxySettings":{
-            "tag":"wireguard"
-        },
-        "tag":"IPv4_Warp"
+            "tag":"Wireguard"
+        }
     },
     {
+        "tag":"IPv6_Warp",
         "protocol":"freedom",
         "settings":{
             "domainStrategy":"UseIPv6"
         },
         "proxySettings":{
-            "tag":"wireguard"
-        },
-        "tag":"IPv6_Warp"
+            "tag":"Wireguard"
+        }
     }
     {
-        "tag": "IPv4_out",
+        "tag": "IPv4_Out",
         "protocol": "freedom",
         "settings":{
             "domainStrategy":"UseIPv4"
         }
     },
     {
-        "tag": "IPv6_out",
+        "tag": "IPv6_Out",
         "protocol": "freedom",
         "settings": {
             "domainStrategy": "UseIPv6"
         }
     },
     {
-        "tag": "residential_proxy",
+        "tag": "Residential_Proxy",
         "protocol": "socks",
         "settings": {
             "servers": [
@@ -80,7 +80,7 @@
         }
     },
     {
-        "protocol": "blackhole",
-        "tag": "block"
+        "tag": "Block"
+        "protocol": "blackhole"
     }
 ]
