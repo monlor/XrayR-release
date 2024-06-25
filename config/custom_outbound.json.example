@@ -45,7 +45,7 @@
         "proxySettings":{
             "tag":"Wireguard"
         }
-    }
+    },
     {
         "tag": "IPv4_Out",
         "protocol": "freedom",
