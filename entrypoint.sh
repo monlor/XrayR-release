@@ -14,7 +14,7 @@ InboundConfigPath: # /etc/XrayR/custom_inbound.json # Path to custom inbound con
 OutboundConfigPath: /etc/XrayR/custom_outbound.json # Path to custom outbound config, check https://xtls.github.io/config/outbound.html for help
 ConnectionConfig:
   Handshake: 4 # Handshake time limit, Second
-  ConnIdle: 30 # Connection idle time limit, Second
+  ConnIdle: ${CONN_IDLE:-600} # Connection idle time limit, Second
   UplinkOnly: 2 # Time limit when the connection downstream is closed, Second
   DownlinkOnly: 4 # Time limit when the connection is closed after the uplink is closed, Second
   BufferSize: 64 # The internal cache size of each connection, kB
@@ -30,7 +30,7 @@ Nodes:
       EnableVless: ${ENABLE_VLESS:-false} # Enable Vless for V2ray Type
       EnableXTLS: ${ENABLE_XTLS:-false} # Enable XTLS for V2ray and Trojan
       SpeedLimit: ${SPEED_LIMIT:-0} # Mbps, Local settings will replace remote settings
-      DeviceLimit: 0 # Local settings will replace remote settings
+      DeviceLimit: ${DEVICE_LIMIT_NUM:-2} # Local settings will replace remote settings
       RuleListPath: /etc/XrayR/rulelist # Path to local rulelist file
     ControllerConfig:
       ListenIP: 0.0.0.0 # IP address you want to listen
