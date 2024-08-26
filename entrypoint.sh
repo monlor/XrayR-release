@@ -107,7 +107,9 @@ if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
           "geosite:pixiv",
           "geosite:abema",
           "geosite:viu",
-          "geosite:bilibili"
+          "geosite:bilibili",
+          "geosite:openai",
+          "geosite:anthropic"
         ]
       },
       "localhost"
