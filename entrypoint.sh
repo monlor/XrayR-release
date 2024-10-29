@@ -31,7 +31,7 @@ Nodes:
       EnableXTLS: ${ENABLE_XTLS:-false} # Enable XTLS for V2ray and Trojan
       SpeedLimit: ${SPEED_LIMIT:-0} # Mbps, Local settings will replace remote settings
       # 如果使用了中转节点，限制会不准确，所以值要设置大一些
-      DeviceLimit: ${DEVICE_LIMIT_NUM:-10} # Local settings will replace remote settings
+      DeviceLimit: ${DEVICE_LIMIT_NUM:-0} # Local settings will replace remote settings
       RuleListPath: /etc/XrayR/rulelist # Path to local rulelist file
     ControllerConfig:
       ListenIP: 0.0.0.0 # IP address you want to listen

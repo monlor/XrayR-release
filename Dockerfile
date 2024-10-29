@@ -1,4 +1,4 @@
-FROM ghcr.io/xrayr-project/xrayr:v0.9.1
+FROM ghcr.io/xrayr-project/xrayr:v0.9.4
 
 COPY config /etc/XrayR/
 
