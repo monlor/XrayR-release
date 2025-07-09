@@ -20,7 +20,7 @@ ConnectionConfig:
   BufferSize: ${BUFFER_SIZE:-4096} # The internal cache size of each connection, kB
 Nodes:
   -
-    PanelType: "NewV2board" # Panel type: SSpanel, V2board, NewV2board, PMpanel, Proxypanel, V2RaySocks
+    PanelType: ${PANEL_TYPE:-NewV2board} # Panel type: SSpanel, V2board, NewV2board, PMpanel, Proxypanel, V2RaySocks
     ApiConfig:
       ApiHost: "${API_HOST}"
       ApiKey: "${API_KEY}"
@@ -36,31 +36,43 @@ Nodes:
     ControllerConfig:
       ListenIP: 0.0.0.0 # IP address you want to listen
       SendIP: 0.0.0.0 # IP address you want to send pacakage
-      UpdatePeriodic: 60 # Time to update the nodeinfo, how many sec.
+      UpdatePeriodic: ${UPDATE_PERIODIC:-60} # Time to update the nodeinfo, how many sec.
       EnableDNS: ${ENABLE_DNS:-true} # Use custom DNS config, Please ensure that you set the dns.json well
-      DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
-      EnableProxyProtocol: false # Only works for WebSocket and TCP
+      DNSType: ${DNSType:-AsIs} # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
+      EnableProxyProtocol: ${ENABLE_PROXY_PROTOCOL:-false} # Only works for WebSocket and TCP
       # 限速500mbps，5次告警阈值之后限速到100mbps，持续60分钟
       AutoSpeedLimitConfig:
-        Limit: 500 # Warned speed. Set to 0 to disable AutoSpeedLimit ()
-        WarnTimes: 5 # After (WarnTimes) consecutive warnings, the user will be limited. Set to 0 to punish overspeed user immediately.
-        LimitSpeed: 100 # The speedlimit of a limited user (unit: mbps)
-        LimitDuration: 60 # How many minutes will the limiting last (unit: minute)
+        Limit: ${AUTO_SPEED_LIMIT:-500} # Warned speed. Set to 0 to disable AutoSpeedLimit ()
+        WarnTimes: ${AUTO_SPEED_LIMIT_WARN_TIMES:-5} # After (WarnTimes) consecutive warnings, the user will be limited. Set to 0 to punish overspeed user immediately.
+        LimitSpeed: ${AUTO_SPEED_LIMIT_SPEED:-100} # The speedlimit of a limited user (unit: mbps)
+        LimitDuration: ${AUTO_SPEED_LIMIT_DURATION:-60} # How many minutes will the limiting last (unit: minute)
       GlobalDeviceLimitConfig:
         Enable: ${DEVICE_LIMIT:-false} # Enable the global device limit of a user
         RedisAddr: ${REDIS_ADDR:-127.0.0.1} # The redis server address
         RedisPassword: ${REDIS_PASSWORD:-} # Redis password
-        RedisDB: 0 # Redis DB
-        Timeout: 8 # Timeout for redis request
-        Expiry: 60 # Expiry time (second)
+        RedisDB: ${REDIS_DB:-0} # Redis DB
+        Timeout: ${REDIS_TIMEOUT:-8} # Timeout for redis request
+        Expiry: ${REDIS_EXPIRY:-60} # Expiry time (second)
       EnableFallback: ${ENABLE_FALLBACK:-false} # Only support for Trojan and Vless
       FallBackConfigs:  # Support multiple fallbacks
         -
           SNI: # TLS SNI(Server Name Indication), Empty for any
           Alpn: # Alpn, Empty for any
           Path: # HTTP PATH, Empty for any
-          Dest: 80 # Required, Destination of fallback, check https://xtls.github.io/config/features/fallback.html for details.
-          ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for dsable
+          Dest: ${FALLBACK_DEST:-80} # Required, Destination of fallback, check https://xtls.github.io/config/features/fallback.html for details.
+          ProxyProtocolVer: ${FALLBACK_PROXY_PROTOCOL_VER:-0} # Send PROXY protocol version, 0 for dsable
+      REALITYConfigs:
+        Show: ${REALITY_SHOW:-false} # Show REALITY debug
+        Dest: ${REALITY_DEST:-www.amazon.com:443} # Required, Same as fallback
+        ProxyProtocolVer: ${REALITY_PROXY_PROTOCOL_VER:-0} # Send PROXY protocol version, 0 for disable
+        ServerNames: # Required, list of available serverNames for the client, * wildcard is not supported at the moment.
+          - ${REALITY_SERVER_NAMES:-www.amazon.com}
+        PrivateKey: ${REALITY_PRIVATE_KEY:-} # Required, execute './XrayR x25519' to generate.
+        MinClientVer: ${REALITY_MIN_CLIENT_VER:-} # Optional, minimum version of Xray client, format is x.y.z.
+        MaxClientVer: ${REALITY_MAX_CLIENT_VER:-} # Optional, maximum version of Xray client, format is x.y.z.
+        MaxTimeDiff: 0 # Optional, maximum allowed time difference, unit is in milliseconds.
+        ShortIds: # Required, list of available shortIds for the client, can be used to differentiate between different clients.
+          - ${REALITY_SHORT_IDS:-}
       CertConfig:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN:-}" # Domain to cert
