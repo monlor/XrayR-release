@@ -62,7 +62,7 @@ Nodes:
           Dest: ${FALLBACK_DEST:-80} # Required, Destination of fallback, check https://xtls.github.io/config/features/fallback.html for details.
           ProxyProtocolVer: ${FALLBACK_PROXY_PROTOCOL_VER:-0} # Send PROXY protocol version, 0 for dsable
       REALITYConfigs:
-        Show: ${REALITY_SHOW:-false} # Show REALITY debug
+        Show: ${REALITY_SHOW:-true} # Show REALITY debug
         Dest: ${REALITY_DEST:-www.amazon.com:443} # Required, Same as fallback
         ProxyProtocolVer: ${REALITY_PROXY_PROTOCOL_VER:-0} # Send PROXY protocol version, 0 for disable
         ServerNames: # Required, list of available serverNames for the client, * wildcard is not supported at the moment.
@@ -72,7 +72,7 @@ Nodes:
         MaxClientVer: ${REALITY_MAX_CLIENT_VER:-} # Optional, maximum version of Xray client, format is x.y.z.
         MaxTimeDiff: 0 # Optional, maximum allowed time difference, unit is in milliseconds.
         ShortIds: # Required, list of available shortIds for the client, can be used to differentiate between different clients.
-          - ${REALITY_SHORT_IDS:-}
+          - ${REALITY_SHORT_IDS:-0}
       CertConfig:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN:-}" # Domain to cert
