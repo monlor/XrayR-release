@@ -13,7 +13,9 @@ fi
 # 预生成 Reality 配置块，私钥/域名/ShortId 全部由面板（Xboard）下发
 if [ "${ENABLE_REALITY}" = "true" ]; then
   REALITY_CONFIG="      EnableREALITY: true # Enable REALITY
-      DisableLocalREALITYConfig: true # Use Reality config from panel API"
+      DisableLocalREALITYConfig: true # Use Reality config from panel API
+      REALITYConfigs:
+        Show: true"
 else
   REALITY_CONFIG="      EnableREALITY: false # Enable REALITY"
 fi
