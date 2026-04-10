@@ -7,6 +7,7 @@ services:
       - API_HOST=
       - API_KEY=
       - NODE_ID=1
+      - LOG_LEVEL=warning
       #  V2ray, Shadowsocks, Trojan
       - NODE_TYPE=Trojan
       # for cert

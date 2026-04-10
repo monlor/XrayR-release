@@ -4,6 +4,16 @@ set -ue
 
 ENABLE_REALITY=${ENABLE_REALITY:-false}
 ENABLE_VLESS=${ENABLE_VLESS:-false}
+LOG_LEVEL=${LOG_LEVEL:-warning}
+
+case "${LOG_LEVEL}" in
+  none|error|warning|info|debug)
+    ;;
+  *)
+    echo "无效的 LOG_LEVEL: ${LOG_LEVEL}，支持: none, error, warning, info, debug" >&2
+    exit 1
+    ;;
+esac
 
 # Reality 模式下无需 TLS 证书，强制 CertMode 为 none
 if [ "${ENABLE_REALITY}" = "true" ]; then
@@ -23,7 +33,7 @@ fi
 echo "生成XrayR配置..."
 cat > /etc/XrayR/config.yml <<-EOF
 Log:
-  Level: warning # Log level: none, error, warning, info, debug
+  Level: ${LOG_LEVEL} # Log level: none, error, warning, info, debug
   AccessPath: # /etc/XrayR/access.Log
   ErrorPath: # /etc/XrayR/error.log
 DnsConfigPath: /etc/XrayR/dns.json # Path to dns config, check https://xtls.github.io/config/dns.html for help

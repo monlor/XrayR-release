@@ -4,6 +4,7 @@
 2. 仅支持NewV2Board，为了简化部署配置
 3. 添加常用审计规则
 4. chatgpt解锁，不支持大陆、香港和美国 LA的vps，[来源](https://github.com/fscarmen/warp/blob/main/README.md#通过-warp-解锁-chatgpt-的方法)
+5. 支持通过环境变量 `LOG_LEVEL` 配置日志级别
 
 # XRayR
 A Xray backend framework that can easily support many panels.
@@ -39,6 +40,16 @@ chmod +x /usr/local/bin/docker-compose
 3. 编辑config。
 配置文件基本格式如下，Nodes下可以同时添加多个面板，多个节点配置信息，只需添加相同格式的Nodes item即可。
 4. 启动docker：`docker-compose up -d`
+
+如果使用仓库里的 `docker-compose.yml` / `entrypoint.sh` 模板生成配置，可以通过环境变量设置日志级别：
+
+```yaml
+environment:
+  - LOG_LEVEL=info
+```
+
+支持的值：`none`、`error`、`warning`、`info`、`debug`，默认值为 `warning`。
+
 ```
 Log:
   Level: none # Log level: none, error, warning, info, debug 
