@@ -2,6 +2,22 @@
 
 set -ue
 
+ENABLE_REALITY=${ENABLE_REALITY:-false}
+ENABLE_VLESS=${ENABLE_VLESS:-false}
+
+# Reality 模式下无需 TLS 证书，强制 CertMode 为 none
+if [ "${ENABLE_REALITY}" = "true" ]; then
+  CERT_MODE=none
+fi
+
+# 预生成 Reality 配置块，私钥/域名/ShortId 全部由面板（Xboard）下发
+if [ "${ENABLE_REALITY}" = "true" ]; then
+  REALITY_CONFIG="      EnableREALITY: true # Enable REALITY
+      DisableLocalREALITYConfig: true # Use Reality config from panel API"
+else
+  REALITY_CONFIG="      EnableREALITY: false # Enable REALITY"
+fi
+
 echo "生成XrayR配置..."
 cat > /etc/XrayR/config.yml <<-EOF
 Log:
@@ -60,23 +76,7 @@ Nodes:
           Path: # HTTP PATH, Empty for any
           Dest: 80 # Required, Destination of fallback, check https://xtls.github.io/config/features/fallback.html for details.
           ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for dsable
-      EnableREALITY: ${ENABLE_REALITY} # Enable REALITY
-      REALITYConfigs:
-        Show: ${REALITY_DEBUG:-true} # Show REALITY debug
-        Dest: ${REALITY_DEST:-www.smzdm.com:443} # Required, Same as fallback
-        ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for disable
-        ServerNames: # Required, list of available serverNames for the client, * wildcard is not supported at the moment.
-$(echo ${REALITY_SERVER_NAMES} | tr ',' '\n' | while read domain; do
-  echo "          - ${domain}"
-done)
-        PrivateKey: ${REALITY_PRIVATE_KEY} # Required, execute './xray x25519' to generate.
-        MinClientVer: # Optional, minimum version of Xray client, format is x.y.z.
-        MaxClientVer: # Optional, maximum version of Xray client, format is x.y.z.
-        MaxTimeDiff: 0 # Optional, maximum allowed time difference, unit is in milliseconds.
-        ShortIds: # Required, list of available shortIds for the client, can be used to differentiate between different clients.
-$(echo ${REALITY_SHORT_IDS} | tr ',' '\n' | while read id; do
-  echo "          - ${ids}"
-done)
+${REALITY_CONFIG}
       CertConfig:
         CertMode: ${CERT_MODE:-http} # Option about how to get certificate: none, file, http, dns
         CertDomain: "${DOMAIN:-}" # Domain to cert

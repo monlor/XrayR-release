@@ -19,6 +19,10 @@ services:
       - CLOUDFLARE_API_KEY=xxx
       - ENABLE_FALLBACK=true
       - ENABLE_DNS=true
+      # VLess + Reality 模式（私钥/域名/ShortId 由面板 Xboard 下发，CERT_MODE 自动设为 none）
+      # - NODE_TYPE=V2ray
+      # - ENABLE_VLESS=true
+      # - ENABLE_REALITY=true
       # 流媒体解锁dns
       - MEDIA_DNS_SERVER=1.2.3.4
       # device limit
