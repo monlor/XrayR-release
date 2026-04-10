@@ -15,7 +15,7 @@ if [ "${ENABLE_REALITY}" = "true" ]; then
   REALITY_CONFIG="      EnableREALITY: true # Enable REALITY
       DisableLocalREALITYConfig: true # Use Reality config from panel API
       REALITYConfigs:
-        Show: true"
+        Show: false"
 else
   REALITY_CONFIG="      EnableREALITY: false # Enable REALITY"
 fi
@@ -23,7 +23,7 @@ fi
 echo "生成XrayR配置..."
 cat > /etc/XrayR/config.yml <<-EOF
 Log:
-  Level: warning # Log level: none, error, warning, info, debug 
+  Level: warning # Log level: none, error, warning, info, debug
   AccessPath: # /etc/XrayR/access.Log
   ErrorPath: # /etc/XrayR/error.log
 DnsConfigPath: /etc/XrayR/dns.json # Path to dns config, check https://xtls.github.io/config/dns.html for help
@@ -98,7 +98,7 @@ if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
   if ! echo ${dns_ip} | grep -qE '^([0-9]{1,3}\.){3}[0-9]{1,3}$'; then
     dns_ip=$(nslookup ${dns_ip} | grep -A 1 'Name:' | tail -n 1 | awk '{print $NF}')
   fi
-  
+
   dns_port=$(echo ${MEDIA_DNS_SERVER} | awk -F ':' '{print $2}')
   cat > /etc/XrayR/dns.json <<-EOF
 {
@@ -106,7 +106,7 @@ if [ -n "${MEDIA_DNS_SERVER:-}" ]; then
       "8.8.8.8",
       "8.8.4.4",
       {
-        
+
         "address": "${dns_ip}",
         "port": ${dns_port:-53},
         "domains": [
